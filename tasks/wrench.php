@@ -14,11 +14,11 @@
 
  class Wrench {
 
- 	static $file = APPPATH.'/tmp/wrench-downtime.txt';
+ 	protected static $file = '/tmp/wrench-downtime.txt';
 
  	public static function run()
  	{
- 		if(file_exists(static::$file))
+ 		if(file_exists(APPPATH.static::$file))
  		{
  			static::finish();
  		}
@@ -30,18 +30,18 @@
 
  	public static function finish()
  	{
- 		if(file_exists(static::$file))
+ 		if(file_exists(APPPATH.static::$file))
  		{
- 			unlink(static::$file);
+ 			unlink(APPPATH.static::$file);
  			\Cli::write('Site out of maintenance mode.', 'green');
  		}
  	}
 
  	public static function start()
  	{
- 		if(!file_exists(static::$file))
+ 		if(!file_exists(APPPATH.static::$file))
  		{
- 			file_put_contents($file, 'down');
+ 			file_put_contents(APPPATH.static::$file, 'down');
  			\Cli::write('Site in maintenance mode.', 'green');
  		}
  	}
