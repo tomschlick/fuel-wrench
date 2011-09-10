@@ -14,16 +14,32 @@
 
  class Wrench {
 
+ 	static $file = APPPATH.'/tmp/wrench-downtime.txt';
+
  	public static function run()
  	{
- 		$file = APPPATH.'/tmp/wrench-downtime.txt';
-
- 		if(file_exists($file))
+ 		if(file_exists(static::$file))
  		{
- 			unlink($file);
- 			\Cli::write('Site out of maintenance mode.', 'green');
+ 			static::finish();
  		}
  		else
+ 		{
+ 			static::start();
+ 		}
+ 	}
+
+ 	public static function finish()
+ 	{
+ 		if(file_exists(static::$file))
+ 		{
+ 			unlink(static::$file);
+ 			\Cli::write('Site out of maintenance mode.', 'green');
+ 		}
+ 	}
+
+ 	public static function start()
+ 	{
+ 		if(!file_exists(static::$file))
  		{
  			file_put_contents($file, 'down');
  			\Cli::write('Site in maintenance mode.', 'green');
@@ -35,6 +51,8 @@
  			echo <<<HELP
 Usage:
     php oil refine wrench
+    php oil refine wrench:start
+    php oil refine wrench:finish
 
 Fuel options:
 
