@@ -12,7 +12,7 @@
 
 class Wrench {
 
-	public function _init()
+	public static function _init()
 	{
 		if(file_exists(APPPATH.'/tmp/wrench-downtime.txt') and !defined('STDIN'))
 		{
