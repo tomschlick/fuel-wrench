@@ -1,6 +1,6 @@
 <?php
 
-class HttpServiceUnavailableException extends \HttpException
+class HttpServiceUnavailableException extends Fuel\Core\HttpException
 {
 	/**
 	 * When this type of exception isn't caught this method is called by
