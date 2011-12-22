@@ -11,5 +11,6 @@
  */
 
 Autoloader::add_classes(array(
-	'Wrench' => __DIR__.'/classes/wrench.php',
+	'Wrench' 							=> __DIR__.'/classes/wrench.php',
+	'HttpServiceUnavailableException'   => __DIR__.'classes/httpserviceunavailableexception.php',
 ));
